@@ -1,0 +1,44 @@
+openapi: 3.0.0
+
+info:
+  description: This is Cheeseria API
+  version: 2.0.1
+  title: Cheeseria API
+  contact:
+    email: albert_zheng66@hotmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+tags:
+  - name: Shopper
+    description: APIs used by shopper end
+paths:
+  '/popular/{startIndex}/{batchSize}':
+    post:
+      tags:
+        - Shopper
+      description: List the most popular cheeses with a range from startIndex and batchSize.
+      parameters:
+        - in: path
+          name: startIndex
+          required: true
+          schema:
+            type: number
+          description: the start index of returned cheeses, started from 0
+        - in: path
+          name: batchSize
+          required: true
+          schema:
+            type: number
+          description: the maximum size of returned cheeses
+
+      responses:
+        '200':
+          description:  An array of language objects
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: 'domain.yaml#/components/schemas/Cheese'
+
